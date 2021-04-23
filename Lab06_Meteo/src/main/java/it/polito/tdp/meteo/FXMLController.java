@@ -5,6 +5,7 @@
 package it.polito.tdp.meteo;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import java.time.*;
@@ -17,30 +18,13 @@ import javafx.scene.control.TextArea;
 
 public class FXMLController
 {
-	private Model model;
-	list<Month> mesii ; 
-	private enum Mesi
-	{
-		GENNAIO,
-		FEBBRAIO,
-		MARZO,
-		APRILE,
-		MAGGIO,
-		GIUGNO,
-		LUGLIO,
-		AGOSTO,
-		SETTEMBRE,
-		OTTOBRE,
-		NOVEMBRE,
-		DICEMBRE;
-	}
-	private Mesi mesi;
+	private Model model; 
 	
 	@FXML private ResourceBundle resources;
 
 	@FXML private URL location;
 
-	@FXML private ChoiceBox<String> boxMese;
+	@FXML private ChoiceBox<Month> boxMese;
 
 	@FXML private Button btnUmidita;
 
@@ -50,7 +34,7 @@ public class FXMLController
 
 	@FXML void doCalcolaUmidita(ActionEvent event)
 	{
-		
+		txtResult.setText(model.getUmiditaMedia(boxMese.getValue().getValue()).toString());
 	}
 
 	@FXML void doCalcolaSequenza(ActionEvent event)
@@ -72,6 +56,6 @@ public class FXMLController
 		this.model = model;
 		
 		for (int i=0; i<12; i++)
-			boxMese.getItems().add(mesi.values()[i].toString());
+			boxMese.getItems().add(Month.values()[i]);
 	}
 }
