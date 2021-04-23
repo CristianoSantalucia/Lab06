@@ -6,49 +6,72 @@ package it.polito.tdp.meteo;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import java.time.*;
+import it.polito.tdp.meteo.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 
-public class FXMLController {
+public class FXMLController
+{
+	private Model model;
+	list<Month> mesii ; 
+	private enum Mesi
+	{
+		GENNAIO,
+		FEBBRAIO,
+		MARZO,
+		APRILE,
+		MAGGIO,
+		GIUGNO,
+		LUGLIO,
+		AGOSTO,
+		SETTEMBRE,
+		OTTOBRE,
+		NOVEMBRE,
+		DICEMBRE;
+	}
+	private Mesi mesi;
+	
+	@FXML private ResourceBundle resources;
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
+	@FXML private URL location;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+	@FXML private ChoiceBox<String> boxMese;
 
-    @FXML // fx:id="boxMese"
-    private ChoiceBox<?> boxMese; // Value injected by FXMLLoader
+	@FXML private Button btnUmidita;
 
-    @FXML // fx:id="btnUmidita"
-    private Button btnUmidita; // Value injected by FXMLLoader
+	@FXML private Button btnCalcola;
 
-    @FXML // fx:id="btnCalcola"
-    private Button btnCalcola; // Value injected by FXMLLoader
+	@FXML private TextArea txtResult;
 
-    @FXML // fx:id="txtResult"
-    private TextArea txtResult; // Value injected by FXMLLoader
+	@FXML void doCalcolaUmidita(ActionEvent event)
+	{
+		
+	}
 
-    @FXML
-    void doCalcolaSequenza(ActionEvent event) {
+	@FXML void doCalcolaSequenza(ActionEvent event)
+	{
+		
+	}
 
-    }
+	@FXML // This method is called by the FXMLLoader when initialization is complete
+	void initialize()
+	{
+		assert boxMese != null : "fx:id=\"boxMese\" was not injected: check your FXML file 'Scene.fxml'.";
+		assert btnUmidita != null : "fx:id=\"btnUmidita\" was not injected: check your FXML file 'Scene.fxml'.";
+		assert btnCalcola != null : "fx:id=\"btnCalcola\" was not injected: check your FXML file 'Scene.fxml'.";
+		assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
+	}
 
-    @FXML
-    void doCalcolaUmidita(ActionEvent event) {
-
-    }
-
-    @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
-        assert boxMese != null : "fx:id=\"boxMese\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnUmidita != null : "fx:id=\"btnUmidita\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnCalcola != null : "fx:id=\"btnCalcola\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
-
-    }
+	public void setModel(Model model)
+	{
+		this.model = model;
+		
+		for (int i=0; i<12; i++)
+			boxMese.getItems().add(mesi.values()[i].toString());
+	}
 }
-
