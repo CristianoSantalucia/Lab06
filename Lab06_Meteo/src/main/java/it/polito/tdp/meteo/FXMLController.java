@@ -6,9 +6,13 @@ package it.polito.tdp.meteo;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import java.time.*;
+
+import it.polito.tdp.meteo.model.Citta;
 import it.polito.tdp.meteo.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +43,7 @@ public class FXMLController
 
 	@FXML void doCalcolaSequenza(ActionEvent event)
 	{
-		
+		txtResult.setText(model.trovaSequenza(boxMese.getValue().getValue()).toString());
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete

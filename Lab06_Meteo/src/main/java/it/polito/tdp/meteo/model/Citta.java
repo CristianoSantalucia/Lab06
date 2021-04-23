@@ -6,10 +6,7 @@ public class Citta
 {
 	private String nome;
 	private List<Rilevamento> rilevamenti;
-	private int counter = 0;
-	
-	private double umidita;
-	public void setUmidita(double u) { this.umidita = u; }
+	private int counter = 0; 
 
 	public Citta(String nome)
 	{
@@ -40,22 +37,7 @@ public class Citta
 	public void setRilevamenti(List<Rilevamento> rilevamenti)
 	{
 		this.rilevamenti = rilevamenti;
-	}
-
-	public int getCounter()
-	{
-		return counter;
-	}
-
-	public void setCounter(int counter)
-	{
-		this.counter = counter;
-	}
-
-	public void increaseCounter()
-	{
-		this.counter += 1;
-	}
+	} 
 
 	@Override public int hashCode()
 	{

@@ -43,15 +43,8 @@ public class MeteoDAO
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-	}
-	
-	/**
-	 * Carica i rilevamenti di una determinata città in un determinato mese
-	 * 
-	 * @param mese
-	 * @param citta
-	 * @return
-	 */
+	} 
+
 	public Citta getRilevamentiCitta(Citta citta)
 	{
 
@@ -85,13 +78,6 @@ public class MeteoDAO
 		}
 	}
 
-	/**
-	 * Carica i rilevamenti di una determinata città in un determinato mese
-	 * 
-	 * @param mese
-	 * @param citta
-	 * @return
-	 */
 	public List<Rilevamento> getAllRilevamentiLocalitaMese(int mese, Citta citta)
 	{
 
@@ -106,7 +92,6 @@ public class MeteoDAO
 			PreparedStatement st = conn.prepareStatement(sql);
 
 			st.setString(1, citta.getNome());
-			// st.setString(2, mese.getValue()); se fosse un oggetto month
 			st.setString(2, Integer.toString(mese));
 
 			ResultSet rs = st.executeQuery();
@@ -131,9 +116,6 @@ public class MeteoDAO
 
 	}
 
-	/**
-	 * Elenco di tutte le città presenti nel database
-	 */
 	public List<Citta> getAllCitta()
 	{
 
@@ -166,14 +148,6 @@ public class MeteoDAO
 
 	}
 
-	/**
-	 * Dato un mese ed una città estrarre dal DB l'umidità media relativa a tale
-	 * mese e tale città (tutti i calcoli sono delegati al database)
-	 * 
-	 * @param mese
-	 * @param citta
-	 * @return
-	 */
 	public Double getUmiditaMedia(int mese, Citta citta)
 	{
 
