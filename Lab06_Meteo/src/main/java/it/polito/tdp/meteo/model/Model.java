@@ -10,7 +10,7 @@ public class Model
 	MeteoDAO dao;
 
 	private List<Citta> leCitta;
-	private List<Citta> best;
+	private List<Citta> migliore;
 
 	private final static int COST = 100;
 	private final static int NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN = 3;
@@ -42,7 +42,7 @@ public class Model
 	public List<Citta> trovaSequenza(int mese)
 	{
 		List<Citta> parziale = new ArrayList<>();
-		this.best = null;
+		this.migliore = null;
 
 		MeteoDAO dao = new MeteoDAO(); 
 		
@@ -50,7 +50,7 @@ public class Model
 			c.setRilevamenti(dao.getAllRilevamentiLocalitaMese(mese, c));
 
 		cerca(parziale, 0);
-		return best;
+		return migliore;
 	}
 
 	private void cerca(List<Citta> parziale, int livello)
@@ -58,10 +58,10 @@ public class Model
 
 		if (livello == NUMERO_GIORNI_TOTALI)
 		{
-			// caso terminale
+			// caso completo
 			Double costo = calcolaCosto(parziale);
-			if (best == null || costo < calcolaCosto(best))
-				best = new ArrayList<>(parziale);
+			if (migliore == null || costo < calcolaCosto(migliore))
+				migliore = new ArrayList<>(parziale);
 		}
 		else
 		{
@@ -81,10 +81,11 @@ public class Model
 	{
 		int cnt = 0;
 		for (Citta prec : parziale)
-			if (prec.equals(nuova)) cnt++;
+			if (prec.equals(nuova))
+				cnt++;
 		if (cnt >= NUMERO_GIORNI_CITTA_MAX) return false;
 		// da qui so che ci sono meno di MAX giorni
-		if (parziale.size() == 0) return true;
+		if (parziale.isEmpty()) return true;
 		if (parziale.size() == 1 || parziale.size() == 2) return parziale.get(parziale.size() - 1).equals(nuova); //almeno 3 giorni
 		if (parziale.get(parziale.size() - 1).equals(nuova)) return true;
 		if (parziale.get(parziale.size() - 1).equals(parziale.get(parziale.size() - 2))
